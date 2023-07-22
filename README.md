@@ -9,10 +9,10 @@ Train one acceptable robot to read and understand Chinese materials.
 ## dureader
 ## medicine
 ## military
-## pCLUE
 ## squad
 ## webqa
 ## yiqing
+## pCLUE
 
 #1 Uniform the data format 
 According to the multiturn dialogs training's requirements in the project LLaMA-Efficient-Tuning, we modify the data format as following. 
@@ -122,10 +122,12 @@ Human:问题是：事故由谁承担什么责任？\nAssistant:",
 ## dureader
 ## medicine
 ## military
-## pCLUE
 ## squad
 ## webqa
 ## yiqing
+以上皆同，使用相同程序进行转换
+
+## pCLUE
 
 
 #2 base llm models selection
