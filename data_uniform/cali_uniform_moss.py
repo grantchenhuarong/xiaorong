@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+import codecs
 import json
 from template import PROMPT_TEMPLATE, USER_QUESTION_MOSS_TEMPLATE, NO_ANSWER
 
@@ -50,42 +52,48 @@ def uniform(file):
                     conversation.append({"human": human, "assistant": assistant})
 
                 # 控制输入不要超长，这个会引起训练当中GPU卡死、爆显存的问题，如果训练框架没有进行裁剪的话。
-                json_dialogs.append({"conversation_id": cnt+1, "category": file.split("\\")[-1].split(".")[0], "conversation": conversation})
+                json_dialogs.append({"conversation_id": cnt+1, "category": file.split("\\")[-1].split(".")[0], "conversation": conversation, "dataset": "moss"})
 
             except Exception as e:
                 print(str(e), example)
 
     return json_dialogs
 
+
+def jsonl_create(json_dialog_list, file_name):
+    with codecs.open(file_name, 'w', encoding='utf-8') as f:
+        for dialog in json_dialog_list:
+            dict_str = json.dumps(dialog, ensure_ascii=False)
+            f.write(dict_str + "\n")
+
 if __name__ == "__main__":
     json_dialogs1 = uniform(file_name1)
-    json.dump(json_dialogs1, open("./json_moss/json_dialogs_cail.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs1, "./json_moss/json_dialogs_cail.jsonl")
 
     json_dialogs2 = uniform(file_name2)
-    json.dump(json_dialogs2, open("./json_moss/json_dialogs_cmrc.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs2, "./json_moss/json_dialogs_cmrc.jsonl")
 
     json_dialogs3 = uniform(file_name3)
-    json.dump(json_dialogs3, open("./json_moss/json_dialogs_drcd.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs3, "./json_moss/json_dialogs_drcd.jsonl")
 
     json_dialogs4 = uniform(file_name4)
-    json.dump(json_dialogs4, open("./json_moss/json_dialogs_dureader.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs4, "./json_moss/json_dialogs_dureader.jsonl")
 
     json_dialogs5 = uniform(file_name5)
-    json.dump(json_dialogs5, open("./json_moss/json_dialogs_medicine.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs5, "./json_moss/json_dialogs_medicine.jsonl")
 
     json_dialogs6 = uniform(file_name6)
-    json.dump(json_dialogs6, open("./json_moss/json_dialogs_military.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs6, "./json_moss/json_dialogs_military.jsonl")
 
     json_dialogs7 = uniform(file_name7)
-    json.dump(json_dialogs7, open("./json_moss/json_dialogs_squad.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs7, "./json_moss/json_dialogs_squad.jsonl")
 
     json_dialogs8 = uniform(file_name8)
-    json.dump(json_dialogs8, open("./json_moss/json_dialogs_webqa.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs8, "./json_moss/json_dialogs_webqa.jsonl")
 
     json_dialogs9 = uniform(file_name9)
-    json.dump(json_dialogs9, open("./json_moss/json_dialogs_yiqing.json", 'w', encoding='UTF-8'), ensure_ascii=False, indent=2)
+    jsonl_create(json_dialogs9, "./json_moss/json_dialogs_yiqing.jsonl")
 
     json_dialogs = json_dialogs1 + json_dialogs2 + json_dialogs3 + json_dialogs4 + json_dialogs5 + json_dialogs6 + \
                    json_dialogs7 + json_dialogs8 + json_dialogs9
-    json.dump(json_dialogs, open("./json_moss/json_dialogs_moss_ru.json", 'w', encoding='UTF-8'), ensure_ascii=False,
-              indent=2)
+    jsonl_create(json_dialogs, "./json_moss/json_dialogs_moss_ru.jsonl")
