@@ -6,6 +6,8 @@ PROMPT_TEMPLATE = """已知信息：
 USER_QUESTION_TEMPLATE = """
 Human:问题是：{question}"""
 
+USER_QUESTION_MOSS_TEMPLATE = """问题是：{question}"""
+
 ASSISTANT_ANSWER_TEMPLATE = """
 Assistant:{answer}"""
 
