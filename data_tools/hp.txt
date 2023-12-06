@@ -1,0 +1,60 @@
+ AI赋能6G无线接入网技术研究
+朱晓丹 黄庆秋
+（广东省电信规划设计院有限公司，广东 广州510630）
+[摘　要]：未来6G网络的发展，将具备超密集大规模连接、多层次多维度网络一体化、系统高感知智能化、极致多样化性能等特性。6G网络需要支持无缝连接和保证数量庞大的设备的不同QoS要求，以及处理来自物理环境的超大量数据。具有强大分析能力、学习能力、优化能力和智能识别能力的人工智能AI技术，将被应用到6G网络中，智能地进行性能优化、知识发现、复杂学习、结构组织和复杂决策。文章通过对AI赋能6G RAN的技术探讨，为后续AI4NET的6G内生智能标准化以及网络实践提供参考。
+[关键词]：6G 人工智能 机器学习 深度学习 强化学习 迁移学习
+AI Empowered 6G RAN Technology Research
+ZHU Xiao-dan, Huang Qing-qiu
+(Guangdong Planning and Designing Institute of Telecommunications Co., Ltd. Guangzhou Guangdong 510630, China)
+[Abstract] The future 6G network, which will feature ultra-dense and massive connectivity, multi-level and multi-dimensional network integration, high system awareness and intelligence, and extreme diverse performance, will need to support seamless connectivity and guarantee different QoS requirements for a huge number of devices, as well as handle ultra-high volumes of data from the physical environment. AI technologies with powerful analysis, learning, optimization, and intelligent recognition capabilities will be applied to 6G networks to intelligently perform performance optimization, knowledge discovery, complex learning, structural organization, and complex decision making. The article explores the technology of AI-enabled 6G RAN to provide a reference for subsequent 6G endogenous intelligence standardization as well as AI4NET network practice.
+[Index Terms] 6G, Artificial Intelligence, Machine Learning, Deep Learning, Reinforcement Learning, Transfer Learning
+1前言
+人工智能AI（Artificial Intelligence）和6G是当今热度最高的两项技术。AI技术与6G融合，可使网络高效智能地完成特定工作/任务，优化网络性能和提升用户感知。6G网络由此可提供比以往更智能的互联、更快的速度、更大的容量和更可靠的连接。这两种技术的结合，赋能各种智慧应用场景，将迸发出惊人的社会发展驱动力。
+根据3GPP的计划，6G标准研究将在Rel-20（2025年）启动，AI技术会在6G深度部署。支持AI的空中接口已确定作为Rel-18以及后续版本的RAN项目之一，将用于性能提升或减少网络复杂性/网络开销。同时，支持AI的NG RAN在数据收集和信令支持方面的能力可得到增强。以上工作均为了实现 6G其中一个技术愿景：AI4NET（AI for Network）。
+AI在网络侧对6G RAN的赋能，是通过AI分析网络数据，并基于这些数据做出决策，可应用于优化网络性能、提升网络运行效率和加强网络安全管理等方面。
+2AI赋能6G背景
+在未来智慧城市中，各类分布式移动应用诸如物联网IoT（Internet of Things）、车联网IoV（Internet of Vehicles）、工业物联网IIoT（Industrial Internet of Things）、机器人物联网IoRT（Internet of Robotic Things）、智慧医疗IoMT（Internet of Medical Things）、虚拟现实AR/VR（Augmented Reality/ Virtual Reality）的部署，在QoS（Quality of Service）和SLA（Service Level Agreement）两方面均对网络有严格的要求，这些都是6G原始驱动力。
+从移动互联，到万物互联，再到万物智联，6G将实现从服务于人、人与物，到支撑智能体高效联接的跃迁[2]。为了达到这一水平，与5G相比，6G需要配备上下文感知的算法来优化其架构、协议和操作。为此，6G须在其基础架构设计中注入AI技术，使之融合到基站、云计算和云存储等基础设施中。软件定义网络（SDN）的传统方法，从分析到决策所需的时间较长。基于深度学习(Deep Learning, DL)  /强化学习(Reinforcement Learning, RL)/ 迁移学习（Transfer Learning，TL）等AI/ML（Machine Learning）算法适用于6G RAN的部署，包括资源、移动性、能效等方面的管理。
+3AI技术驱动6G RAN
+3.1信道估计
+为了满足智慧城市应用在高数据率（Tbps）、低延迟（0.1-1毫秒级）和高可靠性（99.99999%）方面的苛刻要求，许多新技术将在6G RAN得以应用，如太赫兹通信、可见光通信、超大规模MIMO和智能超表面技术等[2]。这些技术将增加无线信道的复杂性，使用传统方法的信道估计带来极大挑战。
+在无线信号传输过程中，无线信道相位偏移会减弱，传输的信息会衰减以及噪声增加，信道估计就是估计信道的特性以从信道效应中恢复传输信息的过程。为了提高6G通信的性能和容量，精确和实时的信道估计变得至关重要。深度学习DL可对精确信道估计提供有效的支持[4]。图1显示了一个基于DL的信道估计过程。原始信息首先与Pilot信号一起传输，然后提取信道的变化对Pilot信号的影响，最后用插值信道的DL法来得到信道特性的估计。
+
+图1 基于深度学习DL的信道估计
+上图展示的是一种基于深度神经网络（DNN）的方法，用于正交频分复用(OFDM)中的信道估计和符号检测。DNN模型通过使用不同信道条件下产生的OFDM样本进行离线训练，然后该模型用于恢复传输信息，无需估计信道特性。
+3.2调制识别
+调制识别的目的识别出噪声干扰环境下的信号调制信息，调制识别有助于信号解调和解码的应用，如干扰识别、频谱监测、认知无线电、威胁评估和信号识别。
+6G网络中数据流量几何级地增加，传统的判决理论方法和统计模式识别方法在效率上不能完全满足要求。卷积神经网络（CNN, Convolution Neural Network）和长短时记忆（Long-Short Term Memory ,LSTM)）可在调制识别中适用，前者适合于空间数据的自动特征提取，而后者则适用于调制识别[4]。如图2所示，卷积神经网络CNN的应用，可以提高调制识别的准确性和效率。
+
+图2 基于卷积神经网络的调制识别
+卷积神经网络来进行信号分类的方式，将接收到的信号作为输入，通过卷积层（Convolutional Layer）提取信号的特征，然后通过全连接层（Dense Layer）将提取的特征映射到不同的调制方式上，最终实现对信号的识别。
+长短时记忆LSTM神经网络通过输入信号的时序信息，学习信号的特征并进行分类。LSTM模型如图3所示，LSTM基于和来计算，内部通过输入门、遗忘门以及输出门三个门和一个内部记忆单元。利用LSTM调制识别是将信号的时域或频域表示作为 LSTM 的输入，通过多个 LSTM 层提取信号的高级特征，最后通过全连接层输出信号的分类结果。
+
+图3 长短时记忆LSTM神经网络模型
+3.3移动性管理
+6G网络需要实现低延迟和高可靠性的业务如IoV, IoRT, and IoMT。为了保证这些应用的QoS，同时改善资源利用率和网络瓶颈，学习和预测用户的移动变得至关重要，基于DRL的方法可作为可选方案，提高移动性管理的效率[1]。
+
+图4 基于DRL的网络终端移动性管理
+如图4所示，可通过结合LSTM和DRL预测移动用户轨迹，LSTM被用来预测移动用户的轨迹，而DRL则用于改善LSTM的模型训练时间。DRL目的是改善LSTM的模型训练时间，不需要人工干预。该方法基于算法预判，在时间效率上优于传统的3GPP 移动性管理如基于位置区域（Location Area）、基于跟踪区域（Tracking Area）的方法，在6G中结合使用将有效提高移动性管理的效率。
+3.4能效管理
+迁移学习TL是指将已经训练好的模型应用于新的任务或领域中，以加快模型的训练速度和提高模型的性能。6G的 RAN设计中，可以利用迁移学习TL结合强化学习RL来提高网络效率。具体来说，6G网络用例在执行各种任务时可以共享时空特征以及网络配置信息,可以实时使用其他用例中训练好的模型来初始化6G RAN参数，经过调整后形成资源分配与控制策略并应用[5]。
+6G RAN能效管理，重点可放在无线接入的资源分配（RA- Resource Allocation）、能源效率（EE-Energy Efficiency）和准入控制（AC- Admission Control）三方面。如图5所示，RAN1和RAN2作为统一网络中两个应用的场景，源是RAN 1，目标是RAN 2，这两个场景的应用部署具有相似性。场景的特点决定了整体的资源配置，假设需要QoS优先，则资源分配规则上需安排更多的资源，或者如果目标是要降低整体能耗，那么能效效率管理（EE）则可释放部分资源降低网络能耗。RAN 1的资源分配、能源效率、准入控制等资源分配与控制策略，可以通过TL/RL算法平移到RAN2中调整后应用，提升网络运行能效。
+
+图5 基于TL/RL的网络资源分配管理
+4结束语
+具备敏捷、灵活和自学习能力的内生智能6G网络，将为未来分布式、动态和智能的智慧城市应用提供基础网络能力。而AI技术将在6G和智慧城市中发挥关键作用。通过探讨几种AI技术在6G RAN的信道估计、调制识别、移动性管理和效能管理等方面的应用，旨在推动6G与AI的融合，6G RAN领域内生智能关键技术、标准方面的探索。
+参考文献：
+［1］李旭娟, 皮建勇. 深度学习在轨迹数据挖掘中的应用研究综述[J]. 计算机科学与应用, 2019, 9(12): 2357-2366.
+Xujuan Li, Jianyong Pi. A Review of the Application of Deep Learning in Trajectory Data Mining[J]. Computer Science and Application, 2019, 9(12), 2357-2366. (in Chinese)
+［2］IMT-2030(6G)推进组. 6G总体愿景与潜在关键技术白皮书[R]. 中国信通院,2021.
+IMT-2030(6G) Promotion Group. White Paper on 6G Vision and Candidate Technologies. China Academy of Information and Communications Technology[R]. 2021. (in Chinese)
+［3］黄鸿清,刘为,伍沛然,等.机器学习在无线信道建模中的应用现状与展望[J]. 移动通信, 2021,45(4): 95-104.
+HUANG Hongqing1, LIU Wei2'3, WU Peiran.et al. Application Status and Prospects of Machine Learning in Wireless Channel Modeling[J]. Mobile Communications. 2021,45(4): 95-104. (in Chinese)
+［4］廖勇,杨植景,李雪.人工智能在6G空口物理层的潜在应用[J]. 北京邮电大学学报, 2022,45(06), 21-30.
+LIAO Yong, YANG Zhijing, LI Xue. Research Progress of Potential Applications of AI in 6G Air Interface Physical Layer[J]. Journal of Beijing University of Posts and Telecommunications, 2022,45(06), 21-30. (in Chinese)
+［5］郑青碧,邓娟,刘奕彤,等. 基于强化学习的基站多维度资源协同分配方案[J]. 无线电通信技术. 2022,48 (04), 638-645.
+ZHENG Qingbi, Deng Juan, LIU Yitong.et al. A Multi-dimensional Resource Collaborative Allocation Solution of Base Stations Based on Reinforcement Learning[J]. Radio Communications Technology 2022,48(4).638-645. (in Chinese)
+
+作者简介：
+朱晓丹，高级工程师，本科毕业于同济大学，现任职于广东省电信规划设计院有限公司，主要研究方向是5G/6G网络、新技术融合基础设施等的技术研究与规划设计。
+黄庆秋，高级工程师，本科毕业于华南理工大学，现任职于广东省电信规划设计院有限公司，主要研究方向是无线通信网络规划、咨询与设计。

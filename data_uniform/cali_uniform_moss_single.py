@@ -13,7 +13,10 @@ file_name7 = r"D:\temp\data\squad_data.json"
 file_name8 = r"D:\temp\data\webqa_data.json"
 file_name9 = r"D:\temp\data\yiqing_data.json"
 
+too_long_cnt = 0
+
 def uniform(file):
+    global too_long_cnt
     json_dialogs = []
     with open(file, "r", encoding="utf-8") as f:
         examples = json.load(f)["data"]
@@ -33,29 +36,34 @@ def uniform(file):
                 question_list = paragraphs[0]["qas"]
                 question_cnt = len(question_list)
 
-                if question_cnt > 0:
-                    # 循环处理问答
+                if question_cnt == 1: # 只保留一问一答的场景
                     conversation = []
+
                     human, assistant = "", ""
-                    for i in range(question_cnt):
-                        # 获取问题
-                        question = question_list[i]["question"]
-                        if i == 0:
-                            human = PROMPT_TEMPLATE.format(context=context, question=question)
-                        else:
-                            human = USER_QUESTION_MOSS_TEMPLATE.format(question=question)
 
+                    # 获取问题
+                    question = question_list[0]["question"]
+                    human = PROMPT_TEMPLATE.format(context=context, question=question)
+
+                    # 获取回答在正文位置
+                    assistant_answer_pos = question_list[0]["answers"][0].get("answer_start", -1) \
+                        if question_list[0]["answers"] else -1
+
+                    if assistant_answer_pos > -1:
                         # 获取回答
-                        assistant = question_list[i]["answers"][0].get("text", NO_ANSWER) \
-                            if question_list[i]["answers"] else NO_ANSWER
-                        if assistant == "。":
-                            assistant = NO_ANSWER ## dureader_data无法回复
+                        assistant = question_list[0]["answers"][0].get("text", NO_ANSWER) \
+                            if question_list[0]["answers"] else NO_ANSWER
+                    else:
+                        assistant = NO_ANSWER
 
-                        # 构造 conversation
-                        conversation.append({"human": human, "assistant": assistant})
-
-                    # 控制输入不要超长，这个会引起训练当中GPU卡死、爆显存的问题，如果训练框架没有进行裁剪的话。
-                    json_dialogs.append({"conversation_id": cnt+1, "category": file.split("\\")[-1].split(".")[0], "conversation": conversation, "dataset": "moss"})
+                    # 构造 conversation
+                    conversation.append({"human": human, "assistant": assistant})
+                    if(len(str(conversation))) < 3500:
+                        # 控制输入不要超长，这个会引起训练当中GPU卡死、爆显存的问题，如果训练框架没有进行裁剪的话。
+                        json_dialogs.append({"conversation_id": cnt+1, "category": file.split("\\")[-1].split(".")[0], "conversation": conversation, "dataset": "moss"})
+                    else:
+                        too_long_cnt += 1
+                        print(str(too_long_cnt) +" Too long!!! ", conversation)
                 else:
                     print("=========================", example)
             except Exception as e:
@@ -71,6 +79,7 @@ def jsonl_create(json_dialog_list, file_name):
             f.write(dict_str + "\n")
 
 if __name__ == "__main__":
+
     # json_dialogs1 = uniform(file_name1)
     # jsonl_create(json_dialogs1, "./json_moss/json_dialogs_cail.jsonl")
     #
@@ -80,8 +89,8 @@ if __name__ == "__main__":
     # json_dialogs3 = uniform(file_name3)
     # jsonl_create(json_dialogs3, "./json_moss/json_dialogs_drcd.jsonl")
 
-    json_dialogs4 = uniform(file_name4)
-    jsonl_create(json_dialogs4, "./json_moss/json_dialogs_dureader.jsonl")
+    # json_dialogs4 = uniform(file_name4)
+    # jsonl_create(json_dialogs4, "./json_moss/json_dialogs_dureader.jsonl")
 
     # json_dialogs5 = uniform(file_name5)
     # jsonl_create(json_dialogs5, "./json_moss/json_dialogs_medicine.jsonl")
@@ -101,5 +110,5 @@ if __name__ == "__main__":
     # json_dialogs = json_dialogs1 + json_dialogs2 + json_dialogs3 + json_dialogs4 + json_dialogs5 + json_dialogs6 + \
     #                json_dialogs7 + json_dialogs8 + json_dialogs9
     # jsonl_create(json_dialogs, "./json_moss/json_dialogs_moss_ru.jsonl")
-    json_dialogs = json_dialogs4 + json_dialogs6 + json_dialogs8 + json_dialogs9
-    jsonl_create(json_dialogs, "./json_moss/json_dialogs_moss_single_ru.jsonl")
+    json_dialogs = json_dialogs6 + json_dialogs8 + json_dialogs9
+    jsonl_create(json_dialogs, "./json_moss/json_dialogs_moss_single_ru2.jsonl")
